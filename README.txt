@@ -1,5 +1,7 @@
 Apache Hive (TM) @VERSION@
 ======================
+https://travis-ci.org/karahiyo/hive.png
+
 
 The Apache Hive (TM) data warehouse software facilitates querying and
 managing large datasets residing in distributed storage. Built on top
