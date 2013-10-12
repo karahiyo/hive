@@ -139,7 +139,7 @@
       <pathelement location="${hive.root}/testlibs/ant-contrib-1.0b3.jar"/>
     </classpath>
   </taskdef>
-  
+
   <!-- ====================================================== -->
   <!-- Macro definitions                                      -->
   <!-- ====================================================== -->
