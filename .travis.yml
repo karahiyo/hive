@@ -2,7 +2,7 @@ language: java
 jdk:
     - openjdk7
 script:
-    - ant jars
+    - ant jar
 notifications:
     emails:
         - a.ryuklnm@gmail.com
