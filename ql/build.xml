@@ -39,6 +39,16 @@
 
   <property name="ql.test.beelinepositive.exclude" value="${test.beelinepositive.exclude}"/>
   
+  <!-- aspectj -->
+  <taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
+    <classpath>
+      <pathelement location="${ql.lib.dir}/aspectjrt.jar" />
+      <pathelement location="${ql.lib.dir}/aspectjtools.jar" />
+      <pathelement location="${ql.lib.dir}/aspectjweaver.jar" />
+      <pathelement location="${ql.lib.dir}/org.aspectj.matcher.jar" />
+    </classpath>
+  </taskdef>
+
   <target name="gen-test" depends="test-conditions, test-init" >
     <echo message="${ant.project.name}"/>
     <taskdef name="qtestgen" classname="org.apache.hadoop.hive.ant.QTestGenTask"
@@ -188,17 +198,25 @@
   <target name="compile" 
           depends="init, ql-init, ivy-retrieve, build-grammar">
     <echo message="Project: ${ant.project.name}"/>
-    <javac
+    <taskdef 
+      resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
+      <classpath>
+        <pathelement location="${ql.lib.dir}/aspectjrt.jar" />
+        <pathelement location="${ql.lib.dir}/aspectjtools.jar" />
+      </classpath>
+    </taskdef>
+    <unjar src="${ql.lib.dir}/aspectjrt.jar" dest="${basedir}/aspectj"/>
+    <iajc
+     source="1.7"
+     classpath="org.aspectj"
      encoding="${build.encoding}"
-     srcdir="${src.dir}:${basedir}/src/gen/thrift/gen-javabean:${build.dir}/gen/antlr/gen-java:${protobuf.build.dir}:${build.dir}/gen/vector"
-     includes="**/*.java"
+     srcdir="${src.dir}:${basedir}/src/gen/thrift/gen-javabean:${build.dir}/gen/antlr/gen-java:${protobuf.build.dir}:${build.dir}/gen/vector:${basedir}/aspectj"
+     includes="**/*.java,org/aspectj/**/*.class"
      destdir="${build.classes}"
      debug="${javac.debug}"
-     deprecation="${javac.deprecation}"
-     includeantruntime="false">
-      <compilerarg line="${javac.args} ${javac.args.warnings}" />
+     deprecation="${javac.deprecation}">
       <classpath refid="classpath"/>
-    </javac>
+    </iajc>
     <copy todir="${build.classes}" failonerror="false">
       <fileset dir="${src.dir}/conf"/>
     </copy>

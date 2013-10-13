@@ -17,3 +17,8 @@ ql/derby.log
 derby.log
 .arc
 ql/TempStatsStore
+build-original
+lib/*
+ql/aspect
+ql/aspectj
+*.swp
