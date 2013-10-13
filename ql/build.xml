@@ -207,6 +207,7 @@
     </taskdef>
     <unjar src="${ql.lib.dir}/aspectjrt.jar" dest="${basedir}/aspectj"/>
     <iajc
+     source="1.7"
      classpath="org.aspectj"
      encoding="${build.encoding}"
      srcdir="${src.dir}:${basedir}/src/gen/thrift/gen-javabean:${build.dir}/gen/antlr/gen-java:${protobuf.build.dir}:${build.dir}/gen/vector:${basedir}/aspectj"
