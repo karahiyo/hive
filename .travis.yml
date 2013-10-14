@@ -2,8 +2,9 @@ language: java
 jdk:
     - openjdk7
 branches:
-    - trunk
-    - dev
+    only:
+        - trunk
+        - dev
 script:
     - ant jar
 notifications:
